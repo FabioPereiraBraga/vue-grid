@@ -1,0 +1,24 @@
+{
+  "name": "public",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "fabio braga"
+  ],
+  "license": "BSD-2-Clause",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^1.0.26",
+    "bootstrap": "^3.3.7",
+    "components-font-awesome": "^4.6.3",
+    "vue-resource": "^0.7.0"
+  }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css"  />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"  />
+</head>
+<body>
+
+
+ <div class="container" id="app">
+
+     <div class="row">
+         <h1>Books</h1>
+     </div>
+
+     <div class="well">
+         <input type="search" v-model="MySearch" class="form-control" placeholder="Search" />
+     </div>
+
+     <div class="row">
+         <table class="table">
+             <thead>
+             <tr>
+                <th>
+                    <i class="fa fa-fw fa-sort"
+                    :class="{'fa-sort-amount-asc': orderCol === 'id'&& orderInverse === 1 ,
+                    'fa-sort-amount-desc': orderCol === 'id' && orderInverse === -1 }"></i>
+                    <a href="#" @click="filterOrderBy($event,'id')">Id</a></th>
+                <th>
+                    <i class="fa fa-fw fa-sort"
+                       :class="{'fa-sort-amount-asc': orderCol === 'title' && orderInverse === 1 ,
+                    'fa-sort-amount-desc': orderCol === 'title' && orderInverse === -1 }"></i>
+                    <a href="#" @click="filterOrderBy($event,'title')">Title</a></th>
+                <th>
+                    <i class="fa fa-fw fa-sort"
+                       :class="{'fa-sort-amount-asc': orderCol === 'value' && orderInverse === 1 ,
+                    'fa-sort-amount-desc': orderCol === 'value' && orderInverse === -1 }"></i>
+                    <a href="#" @click="filterOrderBy($event,'value')">Value</a></th>
+                <th>
+                    <i class="fa fa-fw fa-sort"
+                       :class="{'fa-sort-amount-asc': orderCol === 'description' && orderInverse === 1 ,
+                    'fa-sort-amount-desc': orderCol === 'description' && orderInverse === -1 }"></i>
+                    <a href="#" @click="filterOrderBy($event,'description')">Description</a></th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr v-for="book in books | filterBy MySearch 'title' 'description' | orderBy  orderCol orderInverse ">
+              <td>{{ book.id }}</td>
+              <td>{{ book.title | uppercase }}</td>
+              <td>{{ book.value | currency 'R$' }}</td>
+              <td>{{ book.description }}</td>
+             </tr>
+             </tbody>
+         </table>
+     </div>
+
+     <div class="row">
+
+         <nav class="text-center">
+             <ul class="pagination">
+                 <li :class="{disabled : pagination.current === 1}">
+                     <a href="#"  @click="previous" aria-label="Previous">
+                         <span aria-hidden="true">&laquo;</span>
+                     </a>
+                 </li>
+                 <li v-for="page in pagination.totalPages"
+                 :class="{'active': pagination.current === $index+1}"
+                 ><a href="#" @click="pagerPagination($event,$index)">{{ $index+1 }}</a></li>
+                 <li :class="{disabled : pagination.current === pagination.totalPages}">
+                     <a href="#" @click="next" aria-label="Next">
+                         <span aria-hidden="true">&raquo;</span>
+                     </a>
+                 </li>
+             </ul>
+         </nav>
+
+     </div>
+
+ </div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="bower_components/vue-resource/dist/vue-resource.min.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+
+</body>
+</html>
